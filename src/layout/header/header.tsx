@@ -132,7 +132,7 @@ export const Header = ({search, setSearch}: Props) => {
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, index) => (
-              <Link key={index} to={page.toLocaleLowerCase()} style={{textDecoration: 'none', color: 'whitesmoke', marginRight: 30, marginLeft: (index == 0 ? 20 : 0)}}>
+              <Link key={index} to={`/${page.toLocaleLowerCase()}`} style={{textDecoration: 'none', color: 'whitesmoke', marginRight: 30, marginLeft: (index == 0 ? 20 : 0)}}>
                 <Typography variant='body1' sx={{fontWeight: 'bold'}}>{page}</Typography>
               </Link>
             ))}
