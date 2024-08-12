@@ -1,0 +1,17 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: whitesmoke;
+    min-height: 100vh; /* Ensure the layout takes up the full viewport height */
+    position: sticky;
+  }
+  
+  .main-content {
+    flex: 1; /* Push footer to the bottom */
+    padding: 30px 20px; 
+  }
+
+  Footer {
+    background-color: black;
+  }

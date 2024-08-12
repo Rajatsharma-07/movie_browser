@@ -1,0 +1,31 @@
+.zoom-container {
+    display: inline-block; /* Ensures that the container adjusts to the size of the content */
+    overflow: hidden;      /* Hides any part of the content that exceeds the container bounds */
+    position: relative;
+  }
+  
+  .zoom-image {
+    transition: transform 0.3s ease; /* Smooth zoom transition */
+    /* object-fit: cover; */
+    display: block;
+  }
+  
+  .zoom-image:hover {
+    transform: scale(1.1); /* Scales the image up by 10% */
+  }
+
+  .heart-icon {
+    position: absolute;
+    top: 20px; /* Position the icon */
+    right: 20px; /* Position the icon */
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 24px;
+    color: whitesmoke; /* Heart icon color */
+    transition: transform 0.3s ease;
+}
+
+.heart-icon:hover {
+    transform: scale(1.2); /* Slightly increase size on hover */
+}
