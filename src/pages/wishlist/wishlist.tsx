@@ -8,6 +8,7 @@ export const Wishlist = () => {
     const [initialLoader, setInitialLoader] = useState<boolean>(false);
     const [searchData, setSearchData] = useState<any>([]);
     const [wishlistChanged, setWishlistChanged] = useState<boolean>(true);
+    // This useEffect is called whenever We remove any movie from this page
     useEffect(() => {
         if(wishlistChanged){
             setInitialLoader(true);
@@ -19,6 +20,7 @@ export const Wishlist = () => {
         }
     }, [wishlistChanged]);
 
+    // This is used to fetch the wishlist on the basis of searching
     useEffect(() => {
         let search = searchParams.get('search') ? searchParams.get('search') : "";
         if (search == "") {

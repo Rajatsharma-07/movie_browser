@@ -18,21 +18,27 @@ export const Home = () => {
     const [wishlistChanged, setWishlistChanged] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
     const [showingSearchData, setShowingSearchData] = useState<boolean>(false);
+
+    // This functions opens the filter drawer
     const handleDrawerOpen = () => {
         setOpen(true);
     };
 
+    // This functions closes the filter drawer
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    // This useEffect calls the API for the first time
     useEffect(() => {
         setInitialLoader(true);
-        // localStorage.setItem('wishlist', JSON.stringify([]));
+        // Added Timeout so that loading and fetching looks real
         setTimeout(() => {
             loadData();
         }, 1000);
     }, [])
 
+    // This useEffect is called whenever we click the wishlist button
     useEffect(() => {
         if (wishlistChanged) {
             setWishlistMovies(JSON.parse(localStorage.getItem('wishlist') || "[]"));
@@ -40,8 +46,8 @@ export const Home = () => {
         }
     }, [wishlistChanged])
 
+    // This function is responsible for the movie API call
     const loadData = async () => {
-        setInitialLoader(true);
         const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`;
         const options = {
             method: 'GET',
@@ -68,12 +74,14 @@ export const Home = () => {
             .catch((err) => console.log(err));
     }
 
+    // This is the useEffect where we check for the scrolling feature for infinite scrolling
     useEffect(() => {
         !showingSearchData && window.addEventListener('scroll', handleScroll);
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, [page, hasMore, showingSearchData]);
 
+    // If users reaches near the bottom of the page then this function calls the loadData API
     const handleScroll = () => {
         // Check if the user is near the bottom of the page
         if (
@@ -82,6 +90,7 @@ export const Home = () => {
         ) {
             if (hasMore) {
                 setLoader(true);
+                // Added Timeout so that loading and fetching looks real
                 setTimeout(() => {
                     loadData();
                 }, 1000);
@@ -89,6 +98,7 @@ export const Home = () => {
         }
     };
 
+    // This useEFfect is called whenever we apply filters or searching because they will change the urlSearchParams and then this useffect will gets called
     useEffect(() => {
         if (searchParams.get('search') || searchParams.get('genre') || searchParams.get('year') || searchParams.get('rating')) {
             setShowingSearchData(true);
@@ -97,20 +107,21 @@ export const Home = () => {
         }
         let search = searchParams.get('search') ? searchParams.get('search') : "";
         let genre = searchParams.get('genre') ? searchParams.get('genre') : "please_choose";
-        let year = searchParams.get('year') ? JSON.parse(searchParams.get('year') || "[0,0]") : [0,0];
+        let year = searchParams.get('year') ? JSON.parse(searchParams.get('year') || "[0,0]") : [0, 0];
         let rating = searchParams.get('rating') ? searchParams.get('rating') : "0";
         let data = JSON.parse(JSON.stringify(movies));
+        // Now we will check if any of the filter or searching is not at their default values because by default value we mean nothing is applied on filters yet.
         if (search != "") {
             data = movies.filter((movie: any) => movie.title.toLowerCase().includes(search?.toLowerCase()));
         }
-        if(genre != 'please_choose'){
+        if (genre != 'please_choose') {
             let newData = data?.filter((movie: any) => movie.genre_ids.includes(parseInt(genre || '0')));
             data = newData;
         }
-        if(year.filter((year: number) => year == 0)?.length < 2){
+        if (year.filter((year: number) => year == 0)?.length < 2) {
             data = data?.filter((movie: any) => movie.release_date.split("-")[0] >= year[0] && movie.release_date.split("-")[0] <= year[1]);
         }
-        if(rating != "0"){
+        if (rating != "0") {
             data = data?.filter((movie: any) => Math.round((movie.vote_average / 2)).toString() == rating);
         }
         setSearchData(data);
@@ -133,7 +144,7 @@ export const Home = () => {
             </Stack>
 
             <FilterDrawer
-            key={'asd'}
+                key={'asd'}
                 open={open}
                 handleClose={handleDrawerClose}
                 setShowingSearchData={setShowingSearchData}

@@ -36,18 +36,20 @@ export const FilterDrawer = ({ open, handleClose, setShowingSearchData }: Props)
     const [expanded, setExpanded] = useState<any>(false);
     const [year, setYear] = useState<number[]>([0, 0]);
     const [rating, setRating] = useState('0');
+    // This function is responsible for rating filter value
     const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRating((event.target as HTMLInputElement).value);
     };
-
+    // This function is responsible for year filter value
     const handleYearChange = (event: Event, newValue: number | number[]) => {
         setYear(newValue as number[]);
     };
-
+    // This function is responsible for accordian value(which accordian is open or closed)
     const handleChange = (panel: string) => (event: any, isExpanded: boolean) => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    // This useEffect is called whenever this component gets called for the first time and this is responsible for fetching the genre list which is shown in genre filter
     useEffect(() => {
         if (!genreList?.length) {
             const genreUrl = 'https://api.themoviedb.org/3/genre/movie/list?language=en-US';
@@ -69,6 +71,7 @@ export const FilterDrawer = ({ open, handleClose, setShowingSearchData }: Props)
         }
     }, []);
 
+    // Made a filter List Array to render the filters
     const filterList = [
         {
             name: 'genre',
@@ -129,6 +132,7 @@ export const FilterDrawer = ({ open, handleClose, setShowingSearchData }: Props)
         },
     ];
 
+    // This function is responsible for resetting the filters
     const resetFilters = () => {
         setRating('0');
         setYear([0,0]);
@@ -141,6 +145,7 @@ export const FilterDrawer = ({ open, handleClose, setShowingSearchData }: Props)
         setShowingSearchData(false);
     }
 
+    // This function is responsible for applying the filters
     const applyFilters = () => {
         if(genre !== 'please_choose'){
             searchParams.set('genre', genre.toString());

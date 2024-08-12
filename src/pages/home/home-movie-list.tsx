@@ -1,8 +1,7 @@
-import React from "react";
-import { Card, CardContent, CircularProgress, Grid, Stack, Typography } from "@mui/material"
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useSearchParams } from "react-router-dom";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Card, CardContent, CircularProgress, Grid, Stack, Typography } from "@mui/material";
+import React from "react";
 
 type Props = {
     initialLoader: boolean;
@@ -16,14 +15,16 @@ type Props = {
     showingSearchData: boolean;
     setShowingSearchData: any
 }
-export const HomeMovieList = ({ initialLoader, loader, movies, search, searchData, hasMore, wishlist_movies, setWishlistChanged, showingSearchData, setShowingSearchData }: Props) => {
+export const HomeMovieList = ({ initialLoader, loader, movies, searchData, hasMore, wishlist_movies, setWishlistChanged, showingSearchData, setShowingSearchData }: Props) => {
+    // This is the base URL which in which we will append the image name fetched from the api, So that we can show the image on our UI. 
     const baseURL = 'https://image.tmdb.org/t/p/w200';
-    const [searchParams, setSearchParams] = useSearchParams();
+    // This function is responsible for removing movies from the wishlist
     const handleRemoveFromWishlist = (movie_id: string) => {
         let wishilistMovies = JSON.parse(JSON.stringify(wishlist_movies))?.filter((movie: any) => movie?.id != movie_id);
         localStorage.setItem('wishlist', JSON.stringify(wishilistMovies));
         setWishlistChanged(true);
     }
+    // This function is responsible for adding movies to the wishlist
     const handleAddInWishlist = (movie: any) => {
         let wishilistMovies = JSON.parse(JSON.stringify(wishlist_movies));
         wishilistMovies?.push(movie);
@@ -32,6 +33,7 @@ export const HomeMovieList = ({ initialLoader, loader, movies, search, searchDat
     }
     return (
         <React.Fragment>
+            {/* Loader till the data is not loaded (By default I have added the timeout functionality so that it looks real). */}
             {initialLoader && <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Stack justifyContent={'center'} alignItems={'center'}>
                     <CircularProgress color="secondary" />
@@ -62,6 +64,7 @@ export const HomeMovieList = ({ initialLoader, loader, movies, search, searchDat
                             </Grid>
                         ))}
             </Grid>
+            {/* This loader starts rendering whenever we reach the bottom of the page and fetching the next set of movies list */}
             {loader && hasMore && <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Stack justifyContent={'center'} alignItems={'center'}>
                     <CircularProgress color="secondary" />

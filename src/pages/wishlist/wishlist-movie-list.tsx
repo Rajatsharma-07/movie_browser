@@ -11,7 +11,9 @@ type Props = {
     setWishlistChanged: any
 }
 export const WishlistMovieList = ({ initialLoader, movies, search, searchData, setWishlistChanged }: Props) => {
+    // This is the base URL which in which we will append the image name fetched from the api, So that we can show the image on our UI. 
     const baseURL = 'https://image.tmdb.org/t/p/w200';
+    // This function is responsible for removing movie from the wishlist.
     const handleRemoveFromWishlist = (movie_id: string) => {
         let wishilistMovies = JSON.parse(JSON.stringify(movies))?.filter((movie: any) => movie?.id != movie_id);
         localStorage.setItem('wishlist', JSON.stringify(wishilistMovies));
@@ -19,6 +21,7 @@ export const WishlistMovieList = ({ initialLoader, movies, search, searchData, s
     }
     return (
         <React.Fragment>
+            {/* This is the initial loader part which will render whenever we try to access the wishlist page for the first time.(By default I have added the timeout functionality so that it looks real).*/}
             {initialLoader && <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Stack justifyContent={'center'} alignItems={'center'}>
                     <CircularProgress color="secondary" />
