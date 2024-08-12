@@ -7,6 +7,7 @@ This project is built with TypeScript, and React.Js. The project also includes c
 1. Project Setup
 2. Technologies Used
 3. License
+4. Deployment Link
 
 ## Project Setup
 
@@ -37,5 +38,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 # Deployment Link (may or may not work)
    ```bash
 https://movie-browser-kohl.vercel.app/home
+```
 
+# Note
 ** In case if this website is not working then please follow the steps written in this file.
