@@ -25,6 +25,7 @@ export const Layout = ({ children }: Props) => {
             <Header search={search} setSearch={setSearch} />
         <main className="main-content" style={{backgroundColor: 'black', color: 'whitesmoke'}}>
           <Outlet />
+          {children}
         </main>
         <Footer />
       </div>

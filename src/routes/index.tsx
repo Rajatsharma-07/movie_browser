@@ -8,16 +8,15 @@ const AppRoutes = () => {
     return useRoutes([
         {
             path: '/',
-            element: <Layout><Suspense><Outlet /><Navigate to={'home'} replace /></Suspense> </Layout>,
             children: [
-                        {index: true, element: <Navigate to={'home'} replace />},
+                        {path: '/', element: <Navigate to={'/home'} />},
                         {
                             path: 'home',
-                            element: <Home />
+                            element: <Layout><Suspense><Outlet /><Home /></Suspense> </Layout>
                         },
                         {
                             path: 'wishlist',
-                            element: <Wishlist />
+                            element: <Layout><Suspense><Outlet /><Wishlist /></Suspense> </Layout>
                         },
                     ]
         }

@@ -74,11 +74,6 @@ export const Footer = () => {
     return (
         <Container maxWidth='lg' sx={{background: 'black' }}>
             <Grid container sx={{ mb: 4, mt: 8 }}>
-                {ICONS?.map((icon) =>
-                    <Grid key={icon.key} item xs={2} sm={1}>
-                        <img src={icon.path} alt={icon.name} style={{ width: 30 }} />
-                    </Grid>
-                )}
             </Grid>
             <Grid container sx={{my: 7}}>
                 {CONTENT?.map((content) =>
@@ -89,7 +84,6 @@ export const Footer = () => {
                     </Grid>
                 )}
             </Grid>
-            <Typography variant='subtitle1' sx={{mt: 10, mb: 10}}>Alkye Test</Typography>
         </Container>
     )
 }
