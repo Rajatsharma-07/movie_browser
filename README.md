@@ -41,4 +41,4 @@ https://movie-browser-kohl.vercel.app/home
 ```
 
 # Note
-** In case if this website is not working then please follow the steps written in this file.
+** In case if the deployed website is not working then please follow the steps written in this file and start the project on the local machine.
