@@ -90,7 +90,6 @@ export const Home = () => {
     };
 
     useEffect(() => {
-        console.log('I am called', searchParams.get('search'), searchParams.get('genre'), searchParams.get('year'), searchParams.get('rating'))
         if (searchParams.get('search') || searchParams.get('genre') || searchParams.get('year') || searchParams.get('rating')) {
             setShowingSearchData(true);
         } else {
@@ -106,14 +105,12 @@ export const Home = () => {
         }
         if(genre != 'please_choose'){
             let newData = data?.filter((movie: any) => movie.genre_ids.includes(parseInt(genre || '0')));
-            console.log(newData, genre)
             data = newData;
         }
         if(year.filter((year: number) => year == 0)?.length < 2){
             data = data?.filter((movie: any) => movie.release_date.split("-")[0] >= year[0] && movie.release_date.split("-")[0] <= year[1]);
         }
         if(rating != "0"){
-            console.log(rating)
             data = data?.filter((movie: any) => Math.round((movie.vote_average / 2)).toString() == rating);
         }
         setSearchData(data);

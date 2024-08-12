@@ -10,7 +10,6 @@ export const Wishlist = () => {
     const [wishlistChanged, setWishlistChanged] = useState<boolean>(true);
     useEffect(() => {
         if(wishlistChanged){
-            console.log('I am here')
             setInitialLoader(true);
             setTimeout(() => {
                 setWishlistMovies(JSON.parse(localStorage.getItem('wishlist') || "[]"));
